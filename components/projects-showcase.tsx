@@ -2,6 +2,8 @@ import Link from "next/link";
 import { Reveal } from "./reveal";
 import { SectionHeading } from "./section-heading";
 import { Photo } from "./photo";
+import { TiltCard } from "./tilt-card";
+import { Parallax } from "./parallax";
 
 // Featured (first) project renders as an editorial split hero.
 const featured = {
@@ -182,15 +184,17 @@ export function ProjectsShowcase() {
           <article className="group grid lg:grid-cols-12 gap-6 lg:gap-10 border-t border-bone/10 pt-10">
             <div className="lg:col-span-7 relative aspect-[16/10] lg:aspect-auto lg:min-h-[540px] overflow-hidden">
               <FeaturedVisual />
-              {/* Optional real photo overlay */}
-              <div className="absolute inset-0">
-                <Photo
-                  src="/project-featured.jpg"
-                  alt={featured.title}
-                  sizes="(min-width: 1024px) 55vw, 100vw"
-                />
+              {/* Optional real photo overlay with subtle parallax drift */}
+              <Parallax distance={-60} className="absolute inset-0">
+                <div className="absolute inset-[-8%]">
+                  <Photo
+                    src="/project-featured.jpg"
+                    alt={featured.title}
+                    sizes="(min-width: 1024px) 55vw, 100vw"
+                  />
+                </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-ink to-ink/20" />
-              </div>
+              </Parallax>
               <div className="absolute top-5 left-5 flex items-center gap-2 z-10">
                 <span className="w-2 h-2 bg-signal" />
                 <span className="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-bone">
@@ -240,6 +244,7 @@ export function ProjectsShowcase() {
         <div className="mt-16 grid md:grid-cols-3 gap-6">
           {grid.map((p, i) => (
             <Reveal key={p.title} delay={i * 80}>
+              <TiltCard intensity={6} className="h-full">
               <article className="group relative bg-ink-700 border border-bone/10 hover:border-bone/25 transition-colors overflow-hidden h-full">
                 <div className="relative aspect-[4/3]">
                   <GridArt i={i} />
@@ -269,6 +274,7 @@ export function ProjectsShowcase() {
                   </div>
                 </div>
               </article>
+              </TiltCard>
             </Reveal>
           ))}
         </div>

@@ -3,6 +3,7 @@ import { PageHero } from "@/components/page-hero";
 import { Reveal } from "@/components/reveal";
 import { CtaBand } from "@/components/cta-band";
 import { Photo } from "@/components/photo";
+import { TiltCard } from "@/components/tilt-card";
 import { clients } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -135,7 +136,8 @@ export default function ProjectsPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {projects.map((p, i) => (
               <Reveal key={p.title} delay={i * 60}>
-                <article className="group relative bg-ink-700 border border-bone/10 hover:border-bone/25 transition-colors overflow-hidden">
+                <TiltCard intensity={6} className="h-full">
+                <article className="group relative bg-ink-700 border border-bone/10 hover:border-bone/25 transition-colors overflow-hidden h-full">
                   <div className="relative aspect-[4/3]">
                     <ProjectArt i={i} />
                     <div className="absolute inset-0">
@@ -176,6 +178,7 @@ export default function ProjectsPage() {
                     </dl>
                   </div>
                 </article>
+                </TiltCard>
               </Reveal>
             ))}
           </div>

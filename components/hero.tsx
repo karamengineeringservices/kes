@@ -3,12 +3,12 @@ import { Reveal } from "./reveal";
 import { SplitText } from "./split-text";
 import { Magnetic } from "./magnetic";
 import { KarachiClock } from "./karachi-clock";
-import { HeroVisual } from "./hero-visual";
+import { FrigateScene } from "./frigate-scene";
 
 export function Hero() {
   return (
     <section className="relative min-h-[100svh] pt-20 md:pt-24 overflow-hidden noise">
-      <HeroVisual />
+      <FrigateScene />
 
       {/* Top meta strip */}
       <div className="absolute top-20 md:top-24 left-0 right-0 border-b border-bone/10 z-10">
