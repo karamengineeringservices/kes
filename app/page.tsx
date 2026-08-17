@@ -1,4 +1,5 @@
 import { Hero } from "@/components/hero";
+import { CapabilitiesPinned } from "@/components/capabilities-pinned";
 import { TrustBar } from "@/components/trust-bar";
 import { StickyServices } from "@/components/sticky-services";
 import { WhyUs } from "@/components/why-us";
@@ -13,6 +14,7 @@ export default function HomePage() {
   return (
     <>
       <Hero />
+      <CapabilitiesPinned />
       <TrustBar />
       <StickyServices />
       <WhyUs />
