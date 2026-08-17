@@ -1,21 +1,17 @@
 import type { Metadata } from "next";
-import { Fraunces, Inter, JetBrains_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
 import { ScrollProgress } from "@/components/scroll-progress";
 import { site } from "@/lib/site";
 
-const display = Fraunces({
-  subsets: ["latin"],
-  variable: "--font-display",
-  display: "swap"
-});
-
+// Inter for everything — display + body. Removes Fraunces "funky" serif entirely.
 const sans = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
-  display: "swap"
+  display: "swap",
+  weight: ["300", "400", "500", "600", "700", "800", "900"]
 });
 
 const mono = JetBrains_Mono({
@@ -58,7 +54,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${display.variable} ${sans.variable} ${mono.variable}`}
+      className={`${sans.variable} ${mono.variable}`}
     >
       <body className="min-h-screen bg-ink text-bone antialiased">
         <a

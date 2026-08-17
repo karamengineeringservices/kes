@@ -25,14 +25,12 @@ body {
   font-feature-settings: "cv11", "ss01", "ss03";
 }
 
-/* Display font (Fraunces) — tame the personality: no discretionary/contextual
-   ligatures, no fancy stylistic alternates. Keeps letterforms restrained. */
-.font-display,
+/* Clean sans-serif everywhere. Tight tracking on large headings for that
+   restrained modern-tech look. */
 h1, h2, h3, h4, h5, h6 {
-  font-feature-settings: "liga" 0, "clig" 0, "dlig" 0, "calt" 0;
-  font-variation-settings: "opsz" 14, "SOFT" 0, "WONK" 0;
-  font-optical-sizing: none;
+  letter-spacing: -0.025em;
 }
+h1 { letter-spacing: -0.035em; }
 
 ::selection {
   background: var(--signal);

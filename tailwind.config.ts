@@ -30,7 +30,8 @@ const config: Config = {
         }
       },
       fontFamily: {
-        display: ["var(--font-display)", "Georgia", "serif"],
+        // display is now aliased to the same Inter as sans — clean, modern, restrained.
+        display: ["var(--font-sans)", "system-ui", "sans-serif"],
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
         mono: ["var(--font-mono)", "ui-monospace", "monospace"]
       },
