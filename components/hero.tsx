@@ -12,6 +12,7 @@ import {
   useTransform
 } from "framer-motion";
 import { KarachiClock } from "./karachi-clock";
+import { HeroMedia } from "./hero-media";
 
 /**
  * Hero — heavy motion:
@@ -186,33 +187,13 @@ export function Hero() {
             className="lg:col-span-7 relative"
           >
             <div className="relative aspect-[16/10] max-h-[70vh] w-full overflow-hidden bg-ink-900">
-              {/* Ken Burns image + scroll-linked scale/translate */}
+              {/* Living media: video if hero.mp4 exists, else animated photo scene.
+                  Wrapper adds scroll-linked scale + Y-drift on top. */}
               <motion.div
                 className="absolute inset-0"
                 style={reduce ? undefined : { scale: photoScale, y: photoY }}
               >
-                <motion.div
-                  className="absolute inset-0"
-                  animate={
-                    reduce ? undefined : { scale: [1.05, 1.12], x: ["-1.5%", "1.5%"] }
-                  }
-                  transition={{
-                    duration: 24,
-                    repeat: Infinity,
-                    repeatType: "reverse",
-                    ease: "linear"
-                  }}
-                >
-                  <Image
-                    src="/hero.jpg"
-                    alt="Modern frigate underway on open ocean"
-                    fill
-                    priority
-                    unoptimized
-                    sizes="(min-width: 1024px) 58vw, 100vw"
-                    className="object-cover"
-                  />
-                </motion.div>
+                <HeroMedia />
               </motion.div>
 
               {/* Scan lines — subtle technical feel, drifts on scroll */}
