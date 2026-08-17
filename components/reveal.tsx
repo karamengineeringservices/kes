@@ -38,11 +38,12 @@ export function Reveal({
     return () => obs.disconnect();
   }, []);
 
-  const El = Tag as React.ElementType;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const El: any = Tag;
 
   return (
     <El
-      ref={ref as never}
+      ref={ref}
       className={`reveal ${visible ? "is-visible" : ""} ${className}`}
       style={{ ["--reveal-delay" as string]: `${delay}ms` }}
     >

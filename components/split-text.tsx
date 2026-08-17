@@ -44,12 +44,13 @@ export function SplitText({
     return () => io.disconnect();
   }, []);
 
-  const El = Tag as React.ElementType;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const El: any = Tag;
   const words = text.split(/(\s+)/);
   let idx = 0;
 
   return (
-    <El ref={ref as never} className={className} aria-label={text}>
+    <El ref={ref} className={className} aria-label={text}>
       {words.map((w, i) => {
         if (/^\s+$/.test(w)) return <Fragment key={i}>{w}</Fragment>;
         const myIdx = idx++;
