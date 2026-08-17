@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Logo } from "./logo";
 import { KarachiClock } from "./karachi-clock";
+import { ScrollKnots } from "./scroll-knots";
 import { site, sectors } from "@/lib/site";
 
 const cols = [
@@ -123,8 +124,13 @@ export function Footer() {
           </div>
         </div>
 
+        {/* Scroll-in-knots metric */}
+        <div className="mt-16">
+          <ScrollKnots />
+        </div>
+
         {/* Bottom rail */}
-        <div className="mt-16 pt-6 border-t border-bone/10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div className="mt-10 pt-6 border-t border-bone/10 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-steel">
             © {new Date().getFullYear()} {site.name}. All rights reserved.
           </div>

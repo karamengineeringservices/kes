@@ -4,7 +4,7 @@ import { TrustBar } from "@/components/trust-bar";
 import { StickyServices } from "@/components/sticky-services";
 import { WhyUs } from "@/components/why-us";
 import { CapabilitiesMarquee } from "@/components/capabilities-marquee";
-import { ProjectsShowcase } from "@/components/projects-showcase";
+import { ProjectsCarousel } from "@/components/projects-carousel";
 import { ProcessSection } from "@/components/process-section";
 import { Testimonials } from "@/components/testimonials";
 import { CeoMessage } from "@/components/ceo-message";
@@ -19,7 +19,7 @@ export default function HomePage() {
       <StickyServices />
       <WhyUs />
       <CapabilitiesMarquee />
-      <ProjectsShowcase />
+      <ProjectsCarousel />
       <ProcessSection />
       <Testimonials />
       <CeoMessage />
