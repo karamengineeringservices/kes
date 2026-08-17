@@ -1,43 +1,68 @@
 "use client";
 
 import Link from "next/link";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Reveal } from "./reveal";
 import { SplitText } from "./split-text";
 import { Magnetic } from "./magnetic";
 import { KarachiClock } from "./karachi-clock";
-import { FrigateScene } from "./frigate-scene";
-import { Hero3D } from "./hero-3d";
+import Image from "next/image";
 
+/**
+ * Hero — clean minimalist Seasats-inspired composition:
+ * - Full-viewport background: tries /hero.jpg, falls back to a deep ocean gradient.
+ * - Left-third dark scrim so headline + CTAs stay readable regardless of photo.
+ * - Restrained typography, no ship 3D or heavy scene until a real hero photo lands.
+ */
 export function Hero() {
   const sectionRef = useRef<HTMLElement | null>(null);
+  const [imgOk, setImgOk] = useState(true);
 
   return (
     <section
       ref={sectionRef}
       className="relative min-h-[100svh] pt-20 md:pt-24 overflow-hidden noise"
     >
-      {/* Mobile / reduced-motion / no-WebGL fallback (always rendered behind) */}
-      <FrigateScene />
+      {/* Background: real hero photo OR premium ocean gradient fallback */}
+      <div className="absolute inset-0 pointer-events-none">
+        {imgOk && (
+          <Image
+            src="/hero.jpg"
+            alt="KARAM Engineering Services"
+            fill
+            priority
+            unoptimized
+            sizes="100vw"
+            className="object-cover"
+            onError={() => setImgOk(false)}
+          />
+        )}
+        {/* Deep ocean gradient — used as base, and as full-screen fallback if no hero.jpg */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: imgOk
+              ? undefined
+              : "radial-gradient(1400px 900px at 70% 40%, #182849 0%, #0A1428 40%, #060D1B 90%)"
+          }}
+        />
+      </div>
 
-      {/* Real 3D scene — hides itself if device can't handle it */}
-      <Hero3D containerRef={sectionRef} />
-
-      {/* Composition scrims — dark left column so text stays readable over whatever
-          the camera reveals in that area */}
+      {/* Composition scrims for text readability */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "linear-gradient(90deg, rgba(6,13,27,0.85) 0%, rgba(6,13,27,0.55) 30%, rgba(6,13,27,0.15) 55%, rgba(6,13,27,0) 75%)"
+            "linear-gradient(90deg, rgba(6,13,27,0.85) 0%, rgba(6,13,27,0.55) 30%, rgba(6,13,27,0.15) 60%, rgba(6,13,27,0) 80%)"
         }}
       />
       <div
         className="absolute inset-x-0 bottom-0 h-40 pointer-events-none"
         style={{
-          background: "linear-gradient(180deg, transparent 0%, rgba(6,13,27,0.6) 100%)"
+          background: "linear-gradient(180deg, transparent 0%, rgba(6,13,27,0.7) 100%)"
         }}
       />
+      <div className="absolute inset-0 grid-bg opacity-25 pointer-events-none" />
 
       {/* Top meta strip */}
       <div className="absolute top-20 md:top-24 left-0 right-0 border-b border-bone/10 z-10 backdrop-blur-[2px]">
@@ -54,7 +79,7 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Corner marks (right side, deliberate negative space around ship) */}
+      {/* Corner marks */}
       <div className="hidden xl:block absolute top-40 right-gutter font-mono text-[0.65rem] uppercase tracking-[0.2em] text-steel z-10">
         <div className="text-right space-y-1">
           <div className="text-steel-600">Est. 2021 · Pakistan</div>
@@ -63,7 +88,7 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Content — anchored to the LEFT half so 3D ship on right stays clean */}
+      {/* Content — anchored to LEFT */}
       <div className="relative max-w-container mx-auto px-gutter pt-24 md:pt-40 pb-40 md:pb-48 z-10">
         <Reveal>
           <div className="flex items-center gap-3 mb-10">
