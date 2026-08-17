@@ -1,72 +1,44 @@
 "use client";
 
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { Reveal } from "./reveal";
 import { SplitText } from "./split-text";
 import { Magnetic } from "./magnetic";
 import { KarachiClock } from "./karachi-clock";
-import Image from "next/image";
+import { HeroPhotos } from "./hero-photos";
 
-/**
- * Hero — clean minimalist Seasats-inspired composition:
- * - Full-viewport background: tries /hero.jpg, falls back to a deep ocean gradient.
- * - Left-third dark scrim so headline + CTAs stay readable regardless of photo.
- * - Restrained typography, no ship 3D or heavy scene until a real hero photo lands.
- */
 export function Hero() {
   const sectionRef = useRef<HTMLElement | null>(null);
-  const [imgOk, setImgOk] = useState(true);
 
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-[100svh] pt-20 md:pt-24 overflow-hidden noise"
+      className="relative min-h-[100svh] pt-20 md:pt-24 overflow-hidden"
     >
-      {/* Background: real hero photo OR premium ocean gradient fallback */}
-      <div className="absolute inset-0 pointer-events-none">
-        {imgOk && (
-          <Image
-            src="/hero.jpg"
-            alt="KARAM Engineering Services"
-            fill
-            priority
-            unoptimized
-            sizes="100vw"
-            className="object-cover"
-            onError={() => setImgOk(false)}
-          />
-        )}
-        {/* Deep ocean gradient — used as base, and as full-screen fallback if no hero.jpg */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background: imgOk
-              ? undefined
-              : "radial-gradient(1400px 900px at 70% 40%, #182849 0%, #0A1428 40%, #060D1B 90%)"
-          }}
-        />
-      </div>
+      {/* Full-viewport scroll-linked cinematic photo hero */}
+      <HeroPhotos containerRef={sectionRef} />
 
-      {/* Composition scrims for text readability */}
+      {/* Composition scrims — dark left column + subtle vignette so text stays readable */}
       <div
-        className="absolute inset-0 pointer-events-none"
+        className="absolute inset-0 pointer-events-none z-[1]"
         style={{
           background:
-            "linear-gradient(90deg, rgba(6,13,27,0.85) 0%, rgba(6,13,27,0.55) 30%, rgba(6,13,27,0.15) 60%, rgba(6,13,27,0) 80%)"
+            "linear-gradient(90deg, rgba(4,9,20,0.85) 0%, rgba(4,9,20,0.6) 30%, rgba(4,9,20,0.2) 55%, rgba(4,9,20,0) 75%)"
         }}
       />
       <div
-        className="absolute inset-x-0 bottom-0 h-40 pointer-events-none"
-        style={{
-          background: "linear-gradient(180deg, transparent 0%, rgba(6,13,27,0.7) 100%)"
-        }}
+        className="absolute inset-x-0 top-0 h-48 pointer-events-none z-[1]"
+        style={{ background: "linear-gradient(180deg, rgba(4,9,20,0.6) 0%, transparent 100%)" }}
       />
-      <div className="absolute inset-0 grid-bg opacity-25 pointer-events-none" />
+      <div
+        className="absolute inset-x-0 bottom-0 h-56 pointer-events-none z-[1]"
+        style={{ background: "linear-gradient(180deg, transparent 0%, rgba(4,9,20,0.85) 100%)" }}
+      />
 
       {/* Top meta strip */}
       <div className="absolute top-20 md:top-24 left-0 right-0 border-b border-bone/10 z-10 backdrop-blur-[2px]">
-        <div className="max-w-container mx-auto px-gutter h-10 flex items-center justify-between font-mono text-[0.65rem] uppercase tracking-[0.22em] text-steel">
+        <div className="max-w-container mx-auto px-gutter h-10 flex items-center justify-between font-mono text-[0.65rem] uppercase tracking-[0.22em] text-steel-400">
           <div className="flex items-center gap-3">
             <span className="inline-block w-1.5 h-1.5 bg-signal rounded-full" />
             <span className="text-bone">Karachi, Pakistan</span>
@@ -79,7 +51,7 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Corner marks */}
+      {/* Corner marks (top-right) */}
       <div className="hidden xl:block absolute top-40 right-gutter font-mono text-[0.65rem] uppercase tracking-[0.2em] text-steel z-10">
         <div className="text-right space-y-1">
           <div className="text-steel-600">Est. 2021 · Pakistan</div>
@@ -88,7 +60,7 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Content — anchored to LEFT */}
+      {/* Content — anchored to LEFT so ship photos on right stay clean */}
       <div className="relative max-w-container mx-auto px-gutter pt-24 md:pt-40 pb-40 md:pb-48 z-10">
         <Reveal>
           <div className="flex items-center gap-3 mb-10">
@@ -176,7 +148,7 @@ export function Hero() {
               Oil & Gas · Petrochemicals · Marine
             </span>
           </div>
-          <div className="hidden lg:flex items-center gap-3 text-steel font-mono text-[0.65rem] uppercase tracking-[0.2em]">
+          <div className="hidden lg:flex items-center gap-3 text-steel-400 font-mono text-[0.65rem] uppercase tracking-[0.2em]">
             <span className="w-6 h-px bg-steel" />
             <span className="animate-pulse">Scroll to explore</span>
           </div>
