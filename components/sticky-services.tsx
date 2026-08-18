@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { AnimatePresence, motion } from "framer-motion";
 import { services } from "@/lib/site";
 import { Photo } from "./photo";
 
@@ -79,6 +80,7 @@ export function StickyServices() {
         {/* Sticky left visual */}
         <div className="lg:col-span-5 relative">
           <div className="lg:sticky lg:top-28 aspect-[4/5] max-h-[80vh] bg-ink-700 border border-bone/10 overflow-hidden">
+            {/* Photo layers — crossfade between service photos (nice effect for photos) */}
             {services.map((s, i) => (
               <div
                 key={s.index}
@@ -87,7 +89,6 @@ export function StickyServices() {
                 aria-hidden={active !== i}
               >
                 <ServiceCanvas i={i} />
-                {/* Optional real photo, falls back to canvas if missing */}
                 <div className="absolute inset-0">
                   <Photo
                     src={`/service-${String(i + 1).padStart(2, "0")}.jpg`}
@@ -96,28 +97,46 @@ export function StickyServices() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-ink-900 via-ink-900/40 to-ink-900/20" />
                 </div>
-                {/* Overlay meta */}
-                <div className="absolute inset-0 flex flex-col justify-between p-8 md:p-10 z-10">
-                  <div className="flex items-center justify-between font-mono text-[0.65rem] uppercase tracking-[0.22em] text-bone">
-                    <span className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 bg-signal" />
-                      {s.index} · {s.short}
-                    </span>
-                    <span className="text-steel">
-                      {String(i + 1).padStart(2, "0")} / {String(services.length).padStart(2, "0")}
-                    </span>
-                  </div>
-                  <div>
-                    <div className="text-steel-400 font-mono text-[0.65rem] uppercase tracking-[0.22em] mb-2">
-                      Focus area
-                    </div>
-                    <div className="font-display text-3xl md:text-4xl leading-tight text-bone">
-                      {s.title}
-                    </div>
-                  </div>
-                </div>
               </div>
             ))}
+            {/* Overlay meta — single instance using AnimatePresence mode="wait"
+                so previous overlay fully exits before the next enters. No text ghosting. */}
+            <div className="absolute inset-0 flex flex-col justify-between p-8 md:p-10 z-10 pointer-events-none">
+              <div className="flex items-center justify-between font-mono text-[0.65rem] uppercase tracking-[0.22em] text-bone">
+                <AnimatePresence mode="wait" initial={false}>
+                  <motion.span
+                    key={active}
+                    initial={{ opacity: 0, x: -6 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 6 }}
+                    transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+                    className="flex items-center gap-2"
+                  >
+                    <span className="w-1.5 h-1.5 bg-signal" />
+                    {services[active].index} · {services[active].short}
+                  </motion.span>
+                </AnimatePresence>
+                <span className="text-steel tabular-nums">
+                  {String(active + 1).padStart(2, "0")} / {String(services.length).padStart(2, "0")}
+                </span>
+              </div>
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.div
+                  key={active}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  <div className="text-steel-400 font-mono text-[0.65rem] uppercase tracking-[0.22em] mb-2">
+                    Focus area
+                  </div>
+                  <div className="font-display text-3xl md:text-4xl leading-tight text-bone">
+                    {services[active].title}
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
           </div>
         </div>
 

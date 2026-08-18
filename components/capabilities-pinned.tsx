@@ -1,8 +1,15 @@
 "use client";
 
 import Image from "next/image";
-import { useRef } from "react";
-import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
+import { useRef, useState } from "react";
+import {
+  AnimatePresence,
+  motion,
+  useMotionValueEvent,
+  useScroll,
+  useTransform,
+  useReducedMotion
+} from "framer-motion";
 
 const pillars = [
   {
@@ -29,41 +36,47 @@ const pillars = [
 ];
 
 /**
- * CapabilitiesPinned — Seasats-style pinned sticky-scroll section.
- * The photo pane on the LEFT stays pinned while the pillars scroll past on the RIGHT.
- * Photo swaps as each pillar enters center-viewport (opacity crossfade).
- * Scroll-linked scale on the active photo for extra life.
+ * CapabilitiesPinned — pinned sticky-scroll capabilities section.
+ * Left pane: photo pinned with crossfade between the 3 service images.
+ * Right pane: ONE pillar text rendered at a time via AnimatePresence mode="wait",
+ * so the previous fully exits before the next enters — no text ghosting possible.
  */
 export function CapabilitiesPinned() {
   const ref = useRef<HTMLElement | null>(null);
   const reduce = useReducedMotion();
+  const [active, setActive] = useState(0);
 
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end end"]
   });
 
-  // Each pillar owns 1/3 of the scroll. Tight, near-instant fade zones so
-  // there's no overlapping ghosting between texts.
-  const op1 = useTransform(scrollYProgress, [0, 0.325, 0.335], [1, 1, 0]);
+  // Update active pillar index as user scrolls the section.
+  useMotionValueEvent(scrollYProgress, "change", (v) => {
+    const next = v < 0.34 ? 0 : v < 0.67 ? 1 : 2;
+    setActive((cur) => (cur === next ? cur : next));
+  });
+
+  // Photos on the left use the previous per-layer opacity crossfade — that's
+  // visually pleasing for photos. Text on the right uses hard swap via AnimatePresence.
+  const op1 = useTransform(scrollYProgress, [0, 0.3, 0.36], [1, 1, 0]);
   const op2 = useTransform(
     scrollYProgress,
-    [0, 0.325, 0.335, 0.665, 0.675],
+    [0, 0.3, 0.36, 0.64, 0.7],
     [0, 0, 1, 1, 0]
   );
-  const op3 = useTransform(scrollYProgress, [0, 0.665, 0.675, 1], [0, 0, 1, 1]);
-
+  const op3 = useTransform(scrollYProgress, [0, 0.64, 0.7, 1], [0, 0, 1, 1]);
   const scale = useTransform(scrollYProgress, [0, 1], [1.02, 1.12]);
 
   return (
     <section
       ref={ref}
       className="relative bg-ink text-bone"
-      style={{ height: "300vh" }} // 3 pillars → 3 viewport heights of scroll
+      style={{ height: "300vh" }}
     >
       <div className="sticky top-0 h-screen flex items-center">
         <div className="max-w-container mx-auto w-full px-gutter grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-          {/* LEFT: pinned photo pane */}
+          {/* LEFT: pinned photo pane (crossfade between service photos) */}
           <div className="lg:col-span-6 relative aspect-[4/5] max-h-[75vh] overflow-hidden bg-ink-900">
             {[
               { src: pillars[0].image, alt: pillars[0].title, op: op1 },
@@ -108,7 +121,7 @@ export function CapabilitiesPinned() {
             />
           </div>
 
-          {/* RIGHT: pillar cards stacked, each fades based on section scroll */}
+          {/* RIGHT: single pillar text at a time — AnimatePresence mode="wait" */}
           <div className="lg:col-span-6 relative">
             <div className="mb-10">
               <div className="flex items-center gap-3 mb-6">
@@ -123,32 +136,32 @@ export function CapabilitiesPinned() {
             </div>
 
             <div className="relative min-h-[320px]">
-              {[
-                { p: pillars[0], op: op1 },
-                { p: pillars[1], op: op2 },
-                { p: pillars[2], op: op3 }
-              ].map((it, i) => (
+              <AnimatePresence mode="wait" initial={false}>
                 <motion.div
-                  key={i}
-                  className="absolute inset-0"
-                  style={{ opacity: reduce ? (i === 0 ? 1 : 0) : it.op }}
+                  key={active}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -12 }}
+                  transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                 >
                   <div className="flex items-baseline gap-6 mb-6">
                     <span className="font-mono text-signal text-sm tracking-widest">
-                      {it.p.n}
+                      {pillars[active].n}
                     </span>
                     <span className="h-px flex-1 bg-bone/15" />
                     <span className="font-mono text-[0.65rem] uppercase tracking-[0.22em] text-steel">
-                      {String(i + 1).padStart(2, "0")} / 03
+                      {String(active + 1).padStart(2, "0")} / 03
                     </span>
                   </div>
                   <h3 className="font-display text-4xl md:text-5xl font-semibold tracking-tight text-bone mb-6">
-                    {it.p.title}
+                    {pillars[active].title}
                     <span className="text-signal">.</span>
                   </h3>
-                  <p className="text-steel-400 text-lg leading-relaxed max-w-lg">{it.p.body}</p>
+                  <p className="text-steel-400 text-lg leading-relaxed max-w-lg">
+                    {pillars[active].body}
+                  </p>
                 </motion.div>
-              ))}
+              </AnimatePresence>
             </div>
 
             {/* Progress rail */}
