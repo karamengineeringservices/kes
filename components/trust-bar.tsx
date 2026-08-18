@@ -4,8 +4,8 @@ import { clients } from "@/lib/site";
 
 // Stats structured for the Counter component
 const statBlocks = [
-  { value: 6, suffix: "", label: "Industry sectors served", side: "Oil & Gas · Marine · Power" },
-  { value: 19, suffix: "", label: "PEC specialisation codes", side: "Cat. C4/E · Nineteen only" },
+  { value: 3, suffix: "", label: "Industry sectors served", side: "Oil & Gas · Petrochemicals · Marine" },
+  { value: 19, suffix: "", label: "PEC specialisation codes", side: "" },
   { value: 10, suffix: "+", label: "Core service capabilities", side: "Fabrication · Repair · Blasting" },
   { value: 24, suffix: "/7", label: "Operational readiness", side: "For active engagements" }
 ];

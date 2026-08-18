@@ -34,22 +34,6 @@ export function Hero() {
   const vignetteOpacity = useTransform(scrollYProgress, [0, 1], [0.5, 0.9]);
   const scanShift = useTransform(scrollYProgress, [0, 1], ["0%", "60%"]);
 
-  // Telemetry values that drift with scroll
-  const speedMv = useTransform(scrollYProgress, [0, 1], [12.4, 24.7]);
-  const headingMv = useTransform(scrollYProgress, [0, 1], [237, 289]);
-  const [speed, setSpeed] = useState("12.4");
-  const [heading, setHeading] = useState("237");
-  useEffect(() => {
-    const unsubS = speedMv.on("change", (v) => setSpeed(v.toFixed(1)));
-    const unsubH = headingMv.on("change", (v) =>
-      setHeading(Math.round(v).toString().padStart(3, "0"))
-    );
-    return () => {
-      unsubS();
-      unsubH();
-    };
-  }, [speedMv, headingMv]);
-
   const enter = { y: 0, opacity: 1 };
   const initial = { y: 24, opacity: 0 };
   const t = (delay = 0) => ({
@@ -129,39 +113,6 @@ export function Hero() {
             <span className="text-steel-600">|</span>
             <KarachiClock className="text-bone tabular-nums" />
           </div>
-        </div>
-      </div>
-
-      {/* Floating frame chrome — top-right */}
-      <div className="absolute top-32 md:top-36 right-gutter z-20 flex flex-col items-end gap-2 font-mono text-[0.6rem] uppercase tracking-[0.22em] text-bone/85">
-        <div className="flex items-center gap-2">
-          <span className="w-1.5 h-1.5 bg-signal rounded-full animate-pulse" />
-          Live · Sea trials
-        </div>
-        <div className="text-bone/60">REC · 24°53′N · 67°06′E</div>
-      </div>
-
-      {/* Floating frame chrome — bottom-right telemetry ledger */}
-      <div className="hidden md:grid absolute bottom-24 right-gutter z-20 grid-cols-2 gap-x-8 gap-y-2 font-mono text-[0.65rem] uppercase tracking-[0.22em] text-steel text-right">
-        <div>
-          <div className="text-steel-600">Speed</div>
-          <div className="text-bone mt-0.5 tabular-nums">
-            {speed} <span className="text-steel-600 text-[0.55rem]">kn</span>
-          </div>
-        </div>
-        <div>
-          <div className="text-steel-600">Heading</div>
-          <div className="text-bone mt-0.5 tabular-nums">
-            {heading}<span className="text-steel-600 text-[0.55rem]">°</span>
-          </div>
-        </div>
-        <div>
-          <div className="text-steel-600">Sea state</div>
-          <div className="text-bone mt-0.5">Slight</div>
-        </div>
-        <div>
-          <div className="text-steel-600">Vessel</div>
-          <div className="text-bone mt-0.5">Frigate</div>
         </div>
       </div>
 
