@@ -82,7 +82,7 @@ export function StickyServices() {
             {services.map((s, i) => (
               <div
                 key={s.index}
-                className="absolute inset-0 transition-opacity duration-700"
+                className="absolute inset-0 transition-opacity duration-200"
                 style={{ opacity: active === i ? 1 : 0 }}
                 aria-hidden={active !== i}
               >

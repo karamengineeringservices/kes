@@ -43,10 +43,15 @@ export function CapabilitiesPinned() {
     offset: ["start start", "end end"]
   });
 
-  // Each pillar owns 1/3 of the scroll. Opacity crossfades between them.
-  const op1 = useTransform(scrollYProgress, [0, 0.28, 0.35], [1, 1, 0]);
-  const op2 = useTransform(scrollYProgress, [0.3, 0.4, 0.62, 0.7], [0, 1, 1, 0]);
-  const op3 = useTransform(scrollYProgress, [0.65, 0.75, 1], [0, 1, 1]);
+  // Each pillar owns 1/3 of the scroll. Tight, near-instant fade zones so
+  // there's no overlapping ghosting between texts.
+  const op1 = useTransform(scrollYProgress, [0, 0.325, 0.335], [1, 1, 0]);
+  const op2 = useTransform(
+    scrollYProgress,
+    [0, 0.325, 0.335, 0.665, 0.675],
+    [0, 0, 1, 1, 0]
+  );
+  const op3 = useTransform(scrollYProgress, [0, 0.665, 0.675, 1], [0, 0, 1, 1]);
 
   const scale = useTransform(scrollYProgress, [0, 1], [1.02, 1.12]);
 
