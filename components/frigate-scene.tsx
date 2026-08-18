@@ -14,10 +14,13 @@ import { motion, useReducedMotion } from "framer-motion";
 export function FrigateScene() {
   const reduce = useReducedMotion();
 
-  // Camera scale + x offset (%) keyframes for the 24s cycle
-  const cameraScale = reduce ? [1] : [1, 1.75, 1.75, 1.75, 1];
-  const cameraX = reduce ? [0] : ["0%", "22%", "0%", "-25%", "0%"];
-  const cameraY = reduce ? [0] : ["0%", "3%", "-2%", "3%", "0%"];
+  // Camera scale + offset (%) keyframes for the 24s cycle.
+  // Baseline scale is 1.7 (instead of 1) so the "wide" shot is already zoomed
+  // in on the ship area — no more empty sky at top when frame is very tall.
+  // Transform-origin sits at the ship's centre so zooming keeps it in view.
+  const cameraScale = reduce ? [1.7] : [1.7, 2.35, 2.35, 2.35, 1.7];
+  const cameraX = reduce ? [0] : ["0%", "12%", "0%", "-14%", "0%"];
+  const cameraY = reduce ? [0] : ["0%", "2%", "-2%", "2%", "0%"];
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none select-none">
@@ -60,9 +63,13 @@ export function FrigateScene() {
         </svg>
       </motion.div>
 
-      {/* Camera-panning container wraps ship + water so they move together */}
+      {/* Camera-panning container wraps ship + water so they move together.
+          origin-[50%_75%] pivots the zoom on the ship (which sits in the lower
+          quarter of the SVG viewBox) so the ship stays the focal point when
+          the frame is taller than the natural 16:9 SVG aspect. */}
       <motion.div
-        className="absolute inset-0 origin-center"
+        className="absolute inset-0"
+        style={{ transformOrigin: "50% 75%" }}
         animate={{ scale: cameraScale, x: cameraX, y: cameraY }}
         transition={{
           duration: 24,
