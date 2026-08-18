@@ -12,7 +12,7 @@ import {
   useTransform
 } from "framer-motion";
 import { KarachiClock } from "./karachi-clock";
-import { HeroMedia } from "./hero-media";
+import { FrigateScene } from "./frigate-scene";
 
 /**
  * Hero — heavy motion:
@@ -187,13 +187,13 @@ export function Hero() {
             className="lg:col-span-7 relative"
           >
             <div className="relative aspect-[16/10] max-h-[70vh] w-full overflow-hidden bg-ink-900">
-              {/* Living media: video if hero.mp4 exists, else animated photo scene.
-                  Wrapper adds scroll-linked scale + Y-drift on top. */}
+              {/* Animated SVG frigate scene with cinematic camera cycling through angles.
+                  Wrapper adds scroll-linked scale + Y-drift on top of the internal camera pan. */}
               <motion.div
                 className="absolute inset-0"
                 style={reduce ? undefined : { scale: photoScale, y: photoY }}
               >
-                <HeroMedia />
+                <FrigateScene />
               </motion.div>
 
               {/* Scan lines — subtle technical feel, drifts on scroll */}

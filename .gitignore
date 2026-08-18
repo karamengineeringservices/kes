@@ -39,3 +39,7 @@ next-env.d.ts
 # Scratch / logs
 scratchpad/
 *.log
+
+# Large media (over GitHub's 100MB limit) — served by Vercel from the file
+# system after being uploaded manually or via a small compressed replacement.
+public/hero.mp4
