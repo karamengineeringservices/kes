@@ -93,12 +93,12 @@ export function Hero() {
         }}
       />
 
-      {/* Left-column dark scrim for text readability */}
+      {/* Left-column dark scrim for text readability — softer so ship shows through */}
       <div
         className="absolute inset-0 pointer-events-none z-[2]"
         style={{
           background:
-            "linear-gradient(90deg, rgba(4,9,20,0.9) 0%, rgba(4,9,20,0.7) 25%, rgba(4,9,20,0.4) 50%, rgba(4,9,20,0.15) 70%, rgba(4,9,20,0) 90%)"
+            "linear-gradient(90deg, rgba(4,9,20,0.75) 0%, rgba(4,9,20,0.5) 20%, rgba(4,9,20,0.25) 40%, rgba(4,9,20,0.08) 60%, rgba(4,9,20,0) 80%)"
         }}
       />
 
@@ -171,45 +171,53 @@ export function Hero() {
           className="max-w-container mx-auto w-full px-gutter py-12 md:py-16"
           style={reduce ? undefined : { y: textY, opacity: textOpacity }}
         >
-          <div className="max-w-2xl">
+          <div className="max-w-xl">
             <motion.div
               initial={initial}
               animate={mounted ? enter : initial}
               transition={t(0)}
-              className="flex items-center gap-3 mb-8"
+              className="flex items-center gap-3 mb-6"
             >
               <span className="h-px w-8 bg-signal" />
-              <span className="font-mono uppercase tracking-[0.22em] text-[0.7rem] text-signal">
+              <span className="font-mono uppercase tracking-[0.22em] text-[0.65rem] text-signal">
                 Maritime & Industrial Engineering
               </span>
             </motion.div>
 
-            <h1 className="font-display text-[clamp(2.5rem,6vw,5.25rem)] leading-[1.02] font-semibold tracking-tight text-bone">
+            {/* Headline consolidated from 4 lines to 2 — smaller, lighter, refined */}
+            <h1 className="font-display text-[clamp(1.75rem,3.6vw,3.25rem)] leading-[1.1] font-medium tracking-tight text-bone">
               <span className="sr-only">
                 Engineered for performance. Built for the maritime world.
               </span>
-              {["Engineered for", "performance.", "Built for the", "maritime world."].map(
-                (line, i) => (
-                  <div key={i} className="overflow-hidden">
-                    <motion.span
-                      aria-hidden
-                      initial={initial}
-                      animate={mounted ? enter : initial}
-                      transition={t(0.1 + i * 0.09)}
-                      className={`block ${i === 2 ? "text-signal" : ""}`}
-                    >
-                      {line}
-                    </motion.span>
-                  </div>
-                )
-              )}
+              <div className="overflow-hidden">
+                <motion.span
+                  aria-hidden
+                  initial={initial}
+                  animate={mounted ? enter : initial}
+                  transition={t(0.1)}
+                  className="block"
+                >
+                  Engineered for performance.
+                </motion.span>
+              </div>
+              <div className="overflow-hidden">
+                <motion.span
+                  aria-hidden
+                  initial={initial}
+                  animate={mounted ? enter : initial}
+                  transition={t(0.2)}
+                  className="block text-signal"
+                >
+                  Built for the maritime world.
+                </motion.span>
+              </div>
             </h1>
 
             <motion.p
               initial={initial}
               animate={mounted ? enter : initial}
-              transition={t(0.55)}
-              className="mt-8 text-lg text-steel-400 leading-relaxed max-w-lg"
+              transition={t(0.4)}
+              className="mt-6 text-base text-steel-400 leading-relaxed max-w-md"
             >
               Integrated engineering, fabrication, ship repair, industrial
               maintenance and technical manpower for demanding marine and
@@ -219,12 +227,12 @@ export function Hero() {
             <motion.div
               initial={initial}
               animate={mounted ? enter : initial}
-              transition={t(0.7)}
-              className="mt-10 flex flex-wrap items-center gap-3"
+              transition={t(0.55)}
+              className="mt-8 flex flex-wrap items-center gap-3"
             >
               <Link
                 href="/services"
-                className="group inline-flex items-center gap-3 bg-signal text-bone px-6 py-3.5 text-sm font-medium tracking-wide min-h-[48px] hover:bg-signal-600 transition-colors"
+                className="group inline-flex items-center gap-3 bg-signal text-bone px-5 py-3 text-[0.85rem] font-medium tracking-wide min-h-[44px] hover:bg-signal-600 transition-colors"
               >
                 Explore our services
                 <svg
@@ -240,7 +248,7 @@ export function Hero() {
               </Link>
               <Link
                 href="/contact"
-                className="group inline-flex items-center gap-3 text-bone px-6 py-3.5 text-sm font-medium min-h-[48px] border border-bone/25 hover:border-bone/60 transition-colors"
+                className="group inline-flex items-center gap-3 text-bone px-5 py-3 text-[0.85rem] font-medium min-h-[44px] border border-bone/25 hover:border-bone/60 transition-colors"
               >
                 Request a quote
                 <svg
@@ -254,26 +262,6 @@ export function Hero() {
                   <path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" strokeWidth="1.5" />
                 </svg>
               </Link>
-            </motion.div>
-
-            <motion.div
-              initial={initial}
-              animate={mounted ? enter : initial}
-              transition={t(0.85)}
-              className="mt-12 pt-6 border-t border-bone/10 grid grid-cols-3 gap-4 font-mono text-[0.65rem] uppercase tracking-[0.2em] max-w-xl"
-            >
-              <div>
-                <div className="text-steel-600">Established</div>
-                <div className="text-bone mt-1">2021 · Pakistan</div>
-              </div>
-              <div>
-                <div className="text-steel-600">Licensed</div>
-                <div className="text-bone mt-1">PEC No. 15351</div>
-              </div>
-              <div>
-                <div className="text-steel-600">Category</div>
-                <div className="text-bone mt-1">C4/E · 19 codes</div>
-              </div>
             </motion.div>
           </div>
         </motion.div>
