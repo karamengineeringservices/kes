@@ -186,9 +186,10 @@ export function Hero() {
             transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
             className="lg:col-span-7 relative"
           >
-            <div className="relative aspect-[16/10] max-h-[70vh] w-full overflow-hidden bg-ink-900">
+            <div className="relative w-full h-[min(85vh,760px)] overflow-hidden bg-ink-900">
               {/* Animated SVG frigate scene with cinematic camera cycling through angles.
-                  Wrapper adds scroll-linked scale + Y-drift on top of the internal camera pan. */}
+                  Wrapper adds scroll-linked scale + Y-drift on top of the internal camera pan.
+                  Frame now fills the whole right column height instead of a small 16:10 slot. */}
               <motion.div
                 className="absolute inset-0"
                 style={reduce ? undefined : { scale: photoScale, y: photoY }}
