@@ -1,81 +1,12 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
+import { projects, projectCategories, type Project } from "@/lib/projects";
+import { ProjectCover } from "./project-cover";
 
-type Category = "All" | "Ship Repair" | "Fabrication" | "Industrial" | "Outfitting";
-
-type Project = {
-  tag: string;
-  category: Category;
-  title: string;
-  scope: string;
-  meta: string;
-  image: string;
-};
-
-const projects: Project[] = [
-  {
-    tag: "Ship Repair · Naval",
-    category: "Ship Repair",
-    title: "Vessel structural repair & preservation",
-    scope: "Steel replacement, welded overlays, grit blasting and coating on a naval platform in dock.",
-    meta: "Karachi Dockyard",
-    image: "/hero-2.jpg"
-  },
-  {
-    tag: "Fabrication · Shipbuilding",
-    category: "Fabrication",
-    title: "Hull block fabrication & erection",
-    scope: "Full block assembly, outfitting, hatches and piping installation across a multi-block programme.",
-    meta: "Karachi Shipyard & Engineering Works",
-    image: "/project-1.jpg"
-  },
-  {
-    tag: "Boilers · Industrial",
-    category: "Industrial",
-    title: "Boiler retubing & pressure-vessel manufacture",
-    scope: "Retube of process boilers and manufacture of new pressure vessels to rated specification.",
-    meta: "Industrial client",
-    image: "/project-2.jpg"
-  },
-  {
-    tag: "Outfitting · Marine",
-    category: "Outfitting",
-    title: "Piping, cable-tray & lagging outfitting",
-    scope: "CS/SS/alloy piping, cable-tray runs, insulation lagging and final finishing.",
-    meta: "PRO Shipyard DGS",
-    image: "/project-3.jpg"
-  },
-  {
-    tag: "Heat Exchangers",
-    category: "Fabrication",
-    title: "Shell-and-tube heat exchanger fabrication",
-    scope: "Fabrication to project spec including hydro-test and inspection sign-off.",
-    meta: "Industrial",
-    image: "/project-4.jpg"
-  },
-  {
-    tag: "Steel Structures",
-    category: "Fabrication",
-    title: "Overhead crane fabrication & erection",
-    scope: "Fabrication and erection of an overhead travelling crane, alignment and load test.",
-    meta: "Industrial",
-    image: "/project-5.jpg"
-  },
-  {
-    tag: "Fabrication · Shipbuilding",
-    category: "Ship Repair",
-    title: "Naval platform dry-dock service",
-    scope: "Full-scope docking, hull inspection, waterline preservation and paint scheme.",
-    meta: "Karachi",
-    image: "/hero-3.jpg"
-  }
-];
-
-const cats: Category[] = ["All", "Ship Repair", "Fabrication", "Industrial", "Outfitting"];
+type Category = (typeof projectCategories)[number];
 
 export function ProjectsCarousel() {
   const trackRef = useRef<HTMLDivElement | null>(null);
@@ -154,8 +85,9 @@ export function ProjectsCarousel() {
 
         {/* Filter chips */}
         <div className="flex flex-wrap items-center gap-2 mb-8">
-          {cats.map((c) => {
+          {projectCategories.map((c) => {
             const on = active === c;
+            const count = c === "All" ? projects.length : projects.filter((p) => p.category === c).length;
             return (
               <button
                 key={c}
@@ -167,7 +99,7 @@ export function ProjectsCarousel() {
                     : "text-steel-400 border border-bone/15 hover:border-bone/40 hover:text-bone"
                 }`}
               >
-                {c}
+                {c} <span className={on ? "text-bone/70" : "text-steel-600"}>({count})</span>
               </button>
             );
           })}
@@ -185,7 +117,7 @@ export function ProjectsCarousel() {
           style={{ scrollbarWidth: "none" }}
         >
           {filtered.map((p, i) => (
-            <ProjectCard key={`${p.title}-${i}`} p={p} index={i} />
+            <ProjectCard key={`${p.title}-${p.category}-${i}`} p={p} index={i} />
           ))}
           {/* Trailing spacer so last card can align left */}
           <div className="shrink-0 w-2" />
@@ -252,23 +184,15 @@ function ProjectCard({ p, index }: { p: Project; index: number }) {
     >
       <div className="relative aspect-[4/3] overflow-hidden">
         <motion.div className="absolute inset-0" whileHover={{ scale: 1.05 }} transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}>
-          <Image
-            src={p.image}
-            alt={p.title}
-            fill
-            unoptimized
-            sizes="(min-width: 1280px) 32vw, (min-width: 1024px) 38vw, (min-width: 768px) 48vw, 85vw"
-            className="object-cover"
-          />
+          <ProjectCover p={p} index={index} />
         </motion.div>
-        <div className="absolute inset-0 bg-gradient-to-t from-ink-700 via-ink-700/40 to-transparent" />
-        <div className="absolute top-4 left-4 flex items-center gap-2">
+        <div className="absolute top-4 left-4 flex items-center gap-2 z-10">
           <span className="w-1.5 h-1.5 bg-signal rounded-full" />
           <span className="font-mono text-[0.6rem] uppercase tracking-[0.22em] text-bone">
             {p.tag}
           </span>
         </div>
-        <div className="absolute bottom-4 left-4 right-4 font-mono text-[0.6rem] uppercase tracking-[0.22em] text-bone/80 flex justify-between">
+        <div className="absolute bottom-4 left-4 right-4 font-mono text-[0.6rem] uppercase tracking-[0.22em] text-bone/80 flex justify-between z-10">
           <span>{p.category}</span>
           <span>#{String(index + 1).padStart(2, "0")}</span>
         </div>
@@ -278,7 +202,13 @@ function ProjectCard({ p, index }: { p: Project; index: number }) {
           {p.title}
         </h3>
         <p className="text-steel-400 text-sm leading-relaxed">{p.scope}</p>
-        <div className="mt-6 pt-5 border-t border-bone/10 flex items-center justify-between font-mono text-[0.6rem] uppercase tracking-[0.22em]">
+        <div className="mt-5 pt-4 border-t border-bone/10">
+          <div className="font-mono text-[0.6rem] uppercase tracking-[0.22em] text-steel-600 mb-1">
+            Scale
+          </div>
+          <div className="text-bone text-sm font-medium">{p.scale}</div>
+        </div>
+        <div className="mt-5 pt-4 border-t border-bone/10 flex items-center justify-between font-mono text-[0.6rem] uppercase tracking-[0.22em]">
           <span className="text-steel truncate max-w-[70%]">{p.meta}</span>
           <span className="text-steel-600 group-hover:text-signal transition-colors">
             View →
