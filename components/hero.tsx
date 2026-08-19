@@ -109,8 +109,6 @@ export function Hero() {
             <span className="text-bone">Karachi, Pakistan</span>
           </div>
           <div className="hidden md:flex items-center gap-6">
-            <span>N 24°53′ · E 67°06′</span>
-            <span className="text-steel-600">|</span>
             <KarachiClock className="text-bone tabular-nums" />
           </div>
         </div>

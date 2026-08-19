@@ -101,25 +101,7 @@ export function StickyServices() {
             ))}
             {/* Overlay meta — single instance using AnimatePresence mode="wait"
                 so previous overlay fully exits before the next enters. No text ghosting. */}
-            <div className="absolute inset-0 flex flex-col justify-between p-8 md:p-10 z-10 pointer-events-none">
-              <div className="flex items-center justify-between font-mono text-[0.65rem] uppercase tracking-[0.22em] text-bone">
-                <AnimatePresence mode="wait" initial={false}>
-                  <motion.span
-                    key={active}
-                    initial={{ opacity: 0, x: -6 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: 6 }}
-                    transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-                    className="flex items-center gap-2"
-                  >
-                    <span className="w-1.5 h-1.5 bg-signal" />
-                    {services[active].index} · {services[active].short}
-                  </motion.span>
-                </AnimatePresence>
-                <span className="text-steel tabular-nums">
-                  {String(active + 1).padStart(2, "0")} / {String(services.length).padStart(2, "0")}
-                </span>
-              </div>
+            <div className="absolute inset-0 flex flex-col justify-end p-8 md:p-10 z-10 pointer-events-none">
               <AnimatePresence mode="wait" initial={false}>
                 <motion.div
                   key={active}
@@ -128,9 +110,6 @@ export function StickyServices() {
                   exit={{ opacity: 0, y: -8 }}
                   transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
                 >
-                  <div className="text-steel-400 font-mono text-[0.65rem] uppercase tracking-[0.22em] mb-2">
-                    Focus area
-                  </div>
                   <div className="font-display text-3xl md:text-4xl leading-tight text-bone">
                     {services[active].title}
                   </div>

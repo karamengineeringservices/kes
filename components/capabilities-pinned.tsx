@@ -100,18 +100,6 @@ export function CapabilitiesPinned() {
                 </motion.div>
               </motion.div>
             ))}
-            {/* Frame chrome */}
-            <div className="absolute top-4 left-4 right-4 flex items-center justify-between font-mono text-[0.6rem] uppercase tracking-[0.22em] text-bone/90 z-10">
-              <span className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 bg-signal rounded-full animate-pulse" />
-                Field · Karachi
-              </span>
-              <span>REC</span>
-            </div>
-            <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between font-mono text-[0.6rem] uppercase tracking-[0.22em] text-bone/70 z-10">
-              <span>Capabilities</span>
-              <span className="tabular-nums">03 stages</span>
-            </div>
             <div
               className="absolute inset-0 pointer-events-none"
               style={{
