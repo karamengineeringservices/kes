@@ -22,7 +22,7 @@ const cols = [
       { href: "/services#outfitting", label: "Outfitting Works" },
       { href: "/services#boilers", label: "Boilers & Pressure Vessels" },
       { href: "/services#blasting", label: "Grit Blasting & Painting" },
-      { href: "/services#electrical", label: "Electrical & Hydraulics" },
+      { href: "/services#electrical", label: "Hydraulics System and Overhaul" },
       { href: "/services#manpower", label: "Skilled Manpower" }
     ]
   }

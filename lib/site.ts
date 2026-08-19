@@ -61,7 +61,7 @@ export const services = [
   },
   {
     index: "05",
-    title: "Electrical & Hydraulics",
+    title: "Hydraulics System and Overhaul",
     short: "Systems & overhaul",
     body:
       "Electrical control systems, repair and overhaul of hydraulic systems, and erection of electric pools.",

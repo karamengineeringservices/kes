@@ -9,7 +9,7 @@ const services = [
   "Outfitting Works",
   "Boilers & Pressure Vessels",
   "Grit Blasting & Painting",
-  "Electrical & Hydraulics",
+  "Hydraulics System and Overhaul",
   "Skilled Manpower / Consultancy",
   "Other"
 ];
