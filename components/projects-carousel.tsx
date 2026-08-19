@@ -193,10 +193,10 @@ function ProjectCard({ p, index }: { p: Project; index: number }) {
             #{String(index + 1).padStart(2, "0")}
           </span>
         </div>
-        <h3 className="font-display text-xl md:text-2xl font-semibold leading-tight text-bone mb-3 group-hover:text-signal transition-colors">
+        <h3 className="font-display text-xl md:text-2xl font-semibold leading-tight text-bone mb-3 group-hover:text-signal transition-colors line-clamp-2 min-h-[3.25rem] md:min-h-[3.75rem]">
           {p.title}
         </h3>
-        <p className="text-steel-400 text-sm leading-relaxed">{p.scope}</p>
+        <p className="text-steel-400 text-sm leading-relaxed line-clamp-3 min-h-[4.5rem]">{p.scope}</p>
         <div className="mt-5 pt-4 border-t border-bone/10">
           <div className="font-mono text-[0.6rem] uppercase tracking-[0.22em] text-steel-600 mb-1">
             Scale

@@ -39,10 +39,10 @@ export default function ProjectsPage() {
                           {p.tag}
                         </span>
                       </div>
-                      <h2 className="font-display text-xl md:text-2xl leading-tight text-bone mb-3 group-hover:text-signal transition-colors">
+                      <h2 className="font-display text-xl md:text-2xl leading-tight text-bone mb-3 group-hover:text-signal transition-colors line-clamp-2 min-h-[3.25rem] md:min-h-[3.75rem]">
                         {p.title}
                       </h2>
-                      <p className="text-steel-400 text-sm leading-relaxed">
+                      <p className="text-steel-400 text-sm leading-relaxed line-clamp-3 min-h-[4.5rem]">
                         {p.scope}
                       </p>
                       <dl className="mt-6 pt-5 border-t border-bone/10 grid grid-cols-3 gap-3 font-mono text-[0.65rem] uppercase tracking-[0.18em]">
