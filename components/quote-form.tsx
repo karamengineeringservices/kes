@@ -17,6 +17,7 @@ const services = [
 export function QuoteForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [selected, setSelected] = useState<string[]>([]);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   function toggle(s: string) {
     setSelected((cur) => (cur.includes(s) ? cur.filter((x) => x !== s) : [...cur, s]));
@@ -25,12 +26,42 @@ export function QuoteForm() {
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setStatus("sending");
-    // Real backend not connected — simulate a submit.
-    // Replace with your endpoint (e.g. /api/quote → email/CRM).
-    await new Promise((r) => setTimeout(r, 900));
-    setStatus("sent");
-    (e.target as HTMLFormElement).reset();
-    setSelected([]);
+    setErrorMsg(null);
+
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    const payload = {
+      name: data.get("name"),
+      company: data.get("company"),
+      email: data.get("email"),
+      phone: data.get("phone"),
+      services: data.get("services"),
+      message: data.get("message"),
+      // honeypot field — real users never fill this in
+      website: data.get("website")
+    };
+
+    try {
+      const res = await fetch("/api/quote", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      const result = await res.json().catch(() => ({}));
+
+      if (!res.ok) {
+        setStatus("error");
+        setErrorMsg(result.error || "Something went wrong. Please try again or call us directly.");
+        return;
+      }
+
+      setStatus("sent");
+      form.reset();
+      setSelected([]);
+    } catch {
+      setStatus("error");
+      setErrorMsg("Network error. Please check your connection and try again.");
+    }
   }
 
   const inputCls =
@@ -112,6 +143,16 @@ export function QuoteForm() {
         />
       </div>
 
+      {/* Honeypot — hidden from real users, bots often fill every field */}
+      <input
+        type="text"
+        name="website"
+        tabIndex={-1}
+        autoComplete="off"
+        className="hidden"
+        aria-hidden="true"
+      />
+
       <div className="flex flex-col sm:flex-row sm:items-center gap-6 pt-2">
         <button
           type="submit"
@@ -146,6 +187,15 @@ export function QuoteForm() {
         >
           Thanks. Your enquiry has been received. A member of our team will be in
           touch shortly.
+        </div>
+      )}
+
+      {status === "error" && (
+        <div
+          role="alert"
+          className="mt-6 border border-red-500/40 bg-red-500/10 text-bone p-4 text-sm"
+        >
+          {errorMsg || "Something went wrong. Please try again or call us directly."}
         </div>
       )}
     </form>
