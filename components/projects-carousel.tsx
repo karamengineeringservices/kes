@@ -136,7 +136,7 @@ export function ProjectsCarousel() {
               </span>
             </div>
             <h2 className="font-display text-[clamp(2rem,4.5vw,3.75rem)] leading-[1.02] font-semibold tracking-tight text-bone max-w-[24ch]">
-              A cross section of the work we have delivered<span className="text-signal">.</span>
+              A cross section of the work we have delivered
             </h2>
           </div>
           <div className="md:col-span-4 md:justify-self-end">

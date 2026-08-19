@@ -119,7 +119,7 @@ export function CapabilitiesPinned() {
                 </span>
               </div>
               <h2 className="font-display text-[clamp(2rem,3.8vw,3rem)] leading-[1.05] font-semibold tracking-tight text-bone">
-                Three stages, one accountable partner.
+                Three stages, one accountable partner
               </h2>
             </div>
 
@@ -143,7 +143,6 @@ export function CapabilitiesPinned() {
                   </div>
                   <h3 className="font-display text-4xl md:text-5xl font-semibold tracking-tight text-bone mb-6">
                     {pillars[active].title}
-                    <span className="text-signal">.</span>
                   </h3>
                   <p className="text-steel-400 text-lg leading-relaxed max-w-lg">
                     {pillars[active].body}

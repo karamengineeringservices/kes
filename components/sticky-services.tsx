@@ -56,7 +56,7 @@ export function StickyServices() {
               </span>
             </div>
             <h2 className="font-display text-[clamp(2rem,5vw,4rem)] leading-[1.02] tracking-tighter text-bone max-w-[22ch]">
-              One partner for every maritime and industrial need<span className="text-signal">.</span>
+              One partner for every maritime and industrial need
             </h2>
           </div>
           <div className="md:col-span-4 md:justify-self-end">

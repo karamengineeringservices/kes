@@ -18,7 +18,7 @@ export default function AboutPage() {
         eyebrow="About us"
         title={
           <>
-            A young firm with an old-school engineering ethic<span className="text-signal">.</span>
+            A young firm with an old-school engineering ethic
           </>
         }
         intro="Founded in Karachi in 2021, KARAM Engineering Services provides comprehensive engineering solutions across the maritime and industrial sectors, driven by technical excellence, safety and long-term relationships."
@@ -36,7 +36,7 @@ export default function AboutPage() {
               </Reveal>
               <Reveal delay={80}>
                 <h2 className="font-display text-[clamp(1.75rem,3.5vw,2.75rem)] leading-tight tracking-tighter text-bone">
-                  Comprehensive, cutting-edge solutions for the maritime and industrial sectors.
+                  Comprehensive, cutting-edge solutions for the maritime and industrial sectors
                 </h2>
               </Reveal>
             </div>
@@ -121,7 +121,7 @@ export default function AboutPage() {
             </Reveal>
             <Reveal delay={80}>
               <h2 className="font-display text-[clamp(2rem,4.5vw,3.5rem)] leading-tight tracking-tighter text-bone max-w-[20ch]">
-                Six principles that guide every project<span className="text-signal">.</span>
+                Six principles that guide every project
               </h2>
             </Reveal>
           </div>
@@ -164,7 +164,7 @@ export default function AboutPage() {
                   </span>
                 </div>
                 <h3 className="font-display text-3xl md:text-4xl leading-tight tracking-tight text-ink mb-6">
-                  Work that meets the spec, the workmanship and the deadline.
+                  Work that meets the spec, the workmanship and the deadline
                 </h3>
                 <p className="text-ink-700 leading-relaxed">
                   KARAM Engineering Services is committed to providing quality
@@ -184,7 +184,7 @@ export default function AboutPage() {
                   </span>
                 </div>
                 <h3 className="font-display text-3xl md:text-4xl leading-tight tracking-tight text-ink mb-6">
-                  Safety of men and material, the first consideration.
+                  Safety of men and material, the first consideration
                 </h3>
                 <p className="text-ink-700 leading-relaxed">
                   KARAM Engineering Services is committed to providing a safe

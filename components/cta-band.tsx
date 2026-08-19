@@ -26,7 +26,6 @@ export function CtaBand() {
               <h2 className="font-display text-[clamp(2.5rem,6.5vw,5.5rem)] leading-[0.98] tracking-tighter">
                 Have a specification, drawing<br className="hidden md:block" />{" "}
                 or scope of work?
-                <span className="text-signal">.</span>
               </h2>
             </Reveal>
             <Reveal delay={200}>

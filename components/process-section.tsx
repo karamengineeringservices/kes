@@ -10,8 +10,8 @@ export function ProcessSection() {
           eyebrow="How we work"
           title={
             <>
-              Four steps<span className="text-signal">.</span> From enquiry to
-              handover, without surprise.
+              Four steps, from enquiry to
+              handover, without surprise
             </>
           }
           intro="A predictable, documented process, because your uptime, your budget and your inspection window are the deliverables."
@@ -22,12 +22,9 @@ export function ProcessSection() {
           {process.map((p, i) => (
             <Reveal key={p.step} delay={i * 100} className="bg-ink">
               <div className="p-8 md:p-10 h-full flex flex-col">
-                <div className="flex items-baseline justify-between mb-8">
+                <div className="mb-8">
                   <span className="font-display text-[3.5rem] leading-none text-signal">
                     {p.step}
-                  </span>
-                  <span className="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-steel-600">
-                    Step {i + 1}/4
                   </span>
                 </div>
                 <h3 className="font-display text-2xl tracking-tight text-bone mb-4">

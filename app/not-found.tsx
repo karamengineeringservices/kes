@@ -9,7 +9,7 @@ export default function NotFound() {
           Error · 404
         </div>
         <h1 className="font-display text-[clamp(3rem,10vw,8rem)] leading-none tracking-tighter text-bone">
-          Off the chart<span className="text-signal">.</span>
+          Off the chart
         </h1>
         <p className="mt-6 text-steel-400 text-lg max-w-md">
           The page you&rsquo;re looking for isn&rsquo;t here. Let&rsquo;s get you back to

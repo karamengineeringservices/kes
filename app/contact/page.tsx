@@ -17,7 +17,7 @@ export default function ContactPage() {
         eyebrow="Get in touch"
         title={
           <>
-            Request a quotation<span className="text-signal">.</span>
+            Request a quotation
           </>
         }
         intro="Share your specification, drawing or scope of work. We&rsquo;ll come back with a detailed quotation and project plan, usually within two working days."

@@ -146,7 +146,7 @@ export function Hero() {
                   transition={t(0.1)}
                   className="block"
                 >
-                  Engineered for performance.
+                  Engineered for performance
                 </motion.span>
               </div>
               <div className="overflow-hidden">
@@ -157,7 +157,7 @@ export function Hero() {
                   transition={t(0.2)}
                   className="block text-signal"
                 >
-                  Built for the maritime world.
+                  Built for the maritime world
                 </motion.span>
               </div>
             </h1>

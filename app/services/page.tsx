@@ -26,7 +26,7 @@ export default function ServicesPage() {
         eyebrow="Capabilities"
         title={
           <>
-            Everything the maritime yard and industrial plant asks for<span className="text-signal">.</span>
+            Everything the maritime yard and industrial plant asks for
           </>
         }
         intro="Fabrication, outfitting, preservation, boilers, electrical and hydraulics, delivered by certified technical people who execute safely and on time."
@@ -90,7 +90,7 @@ export default function ServicesPage() {
               </Reveal>
               <Reveal delay={80}>
                 <h2 className="font-display text-[clamp(2rem,4vw,3.25rem)] leading-tight tracking-tighter text-ink max-w-[16ch]">
-                  A certified pool, deployed by discipline<span className="text-signal">.</span>
+                  A certified pool, deployed by discipline
                 </h2>
               </Reveal>
               <Reveal delay={180}>

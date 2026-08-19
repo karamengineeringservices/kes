@@ -5,7 +5,6 @@ import { clients } from "@/lib/site";
 // Stats structured for the Counter component
 const statBlocks = [
   { value: 3, suffix: "", label: "Industry sectors served", side: "Oil & Gas · Petrochemicals · Marine" },
-  { value: 19, suffix: "", label: "PEC specialisation codes", side: "" },
   { value: 10, suffix: "+", label: "Core service capabilities", side: "Fabrication · Repair · Blasting" },
   { value: 24, suffix: "/7", label: "Operational readiness", side: "For active engagements" }
 ];
@@ -15,7 +14,7 @@ export function TrustBar() {
     <section className="relative bg-ink border-y border-bone/10">
       <div className="max-w-container mx-auto px-gutter py-16 md:py-24">
         {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6">
           {statBlocks.map((s, i) => (
             <Reveal key={s.label} delay={i * 80}>
               <div className="group">

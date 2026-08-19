@@ -37,7 +37,7 @@ export function WhyUs() {
             </Reveal>
             <Reveal delay={80}>
               <h2 className="font-display text-[clamp(2rem,4.5vw,3.75rem)] leading-[1.02] tracking-tighter text-ink max-w-[18ch]">
-                Chosen for critical engineering work<span className="text-signal">.</span>
+                Chosen for critical engineering work
               </h2>
             </Reveal>
             <Reveal delay={200}>

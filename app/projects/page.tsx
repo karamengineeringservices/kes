@@ -125,7 +125,7 @@ export default function ProjectsPage() {
         eyebrow="Projects"
         title={
           <>
-            Selected work<span className="text-signal">.</span> Shipyard, plant floor, platform.
+            Selected work<span className="text-signal">,</span> shipyard, plant floor, platform
           </>
         }
         intro="A cross-section of engineering delivered by KARAM. Where project confidentiality or client sign-off is pending, details are shown as clearly-marked placeholders."
@@ -200,7 +200,7 @@ export default function ProjectsPage() {
               </Reveal>
               <Reveal delay={80}>
                 <h2 className="font-display text-[clamp(2rem,4vw,3.25rem)] leading-tight tracking-tighter text-ink max-w-[20ch]">
-                  Serving Pakistan&rsquo;s leading maritime and industrial operators<span className="text-signal">.</span>
+                  Serving Pakistan&rsquo;s leading maritime and industrial operators
                 </h2>
               </Reveal>
             </div>
