@@ -14,24 +14,24 @@ import {
 const pillars = [
   {
     n: "01",
-    title: "Engineer",
+    title: "Design & Planning",
     body:
-      "Certified engineers scope, plan and specify — from structural repair on a naval platform to a new heat exchanger for a process plant.",
-    image: "/service-01.jpg"
+      "Every project starts on paper. Our engineers translate specifications into detailed drawings, structural calculations and a clear execution plan before a single weld is struck.",
+    image: "/pillar-design.jpg"
   },
   {
     n: "02",
     title: "Fabricate",
     body:
       "In-house steel and aluminum fabrication: hulls, blocks, vessels, piping, cable tray, ladders and outfitting to spec.",
-    image: "/service-02.jpg"
+    image: "/pillar-fabricate.jpg"
   },
   {
     n: "03",
     title: "Deliver",
     body:
-      "Skilled technical manpower, HSE-first execution, documentation pack, sign-off inspection. Handover on time, every time.",
-    image: "/service-06.jpg"
+      "Certified welders, fabricators and engineers execute to specification under a safety-first regime, with full documentation and sign-off inspection at handover.",
+    image: "/pillar-deliver.jpg"
   }
 ];
 
