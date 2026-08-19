@@ -3,7 +3,6 @@ import { PageHero } from "@/components/page-hero";
 import { Reveal } from "@/components/reveal";
 import { CtaBand } from "@/components/cta-band";
 import { TiltCard } from "@/components/tilt-card";
-import { ProjectCover } from "@/components/project-cover";
 import { projects } from "@/lib/projects";
 import { clients } from "@/lib/site";
 
@@ -33,16 +32,13 @@ export default function ProjectsPage() {
               <Reveal key={`${p.title}-${p.category}`} delay={i * 60}>
                 <TiltCard intensity={6} className="h-full">
                   <article className="group relative bg-ink-700 border border-bone/10 hover:border-bone/25 transition-colors overflow-hidden h-full">
-                    <div className="relative aspect-[4/3]">
-                      <ProjectCover p={p} index={i} />
-                      <div className="absolute top-4 left-4 flex items-center gap-2 z-10">
+                    <div className="p-6 md:p-8">
+                      <div className="flex items-center gap-2 mb-5">
                         <span className="w-2 h-2 bg-signal" />
                         <span className="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-bone">
                           {p.tag}
                         </span>
                       </div>
-                    </div>
-                    <div className="p-6 md:p-8">
                       <h2 className="font-display text-xl md:text-2xl leading-tight text-bone mb-3 group-hover:text-signal transition-colors">
                         {p.title}
                       </h2>

@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { projects, projectCategories, type Project } from "@/lib/projects";
-import { ProjectCover } from "./project-cover";
 
 type Category = (typeof projectCategories)[number];
 
@@ -182,22 +181,18 @@ function ProjectCard({ p, index }: { p: Project; index: number }) {
       transition={{ duration: 0.6, delay: (index % 6) * 0.05, ease: [0.16, 1, 0.3, 1] }}
       className="group snap-start shrink-0 w-[85vw] sm:w-[62vw] md:w-[48vw] lg:w-[38vw] xl:w-[32vw] bg-ink-700 border border-bone/10 hover:border-bone/25 transition-colors"
     >
-      <div className="relative aspect-[4/3] overflow-hidden">
-        <motion.div className="absolute inset-0" whileHover={{ scale: 1.05 }} transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}>
-          <ProjectCover p={p} index={index} />
-        </motion.div>
-        <div className="absolute top-4 left-4 flex items-center gap-2 z-10">
-          <span className="w-1.5 h-1.5 bg-signal rounded-full" />
-          <span className="font-mono text-[0.6rem] uppercase tracking-[0.22em] text-bone">
-            {p.tag}
+      <div className="p-6 md:p-7">
+        <div className="flex items-center justify-between mb-5">
+          <span className="flex items-center gap-2">
+            <span className="w-1.5 h-1.5 bg-signal rounded-full" />
+            <span className="font-mono text-[0.6rem] uppercase tracking-[0.22em] text-bone">
+              {p.tag}
+            </span>
+          </span>
+          <span className="font-mono text-[0.6rem] uppercase tracking-[0.22em] text-steel-600">
+            #{String(index + 1).padStart(2, "0")}
           </span>
         </div>
-        <div className="absolute bottom-4 left-4 right-4 font-mono text-[0.6rem] uppercase tracking-[0.22em] text-bone/80 flex justify-between z-10">
-          <span>{p.category}</span>
-          <span>#{String(index + 1).padStart(2, "0")}</span>
-        </div>
-      </div>
-      <div className="p-6 md:p-7">
         <h3 className="font-display text-xl md:text-2xl font-semibold leading-tight text-bone mb-3 group-hover:text-signal transition-colors">
           {p.title}
         </h3>
