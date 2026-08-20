@@ -137,10 +137,13 @@ export function CapabilitiesPinned() {
         className="hidden lg:block relative bg-ink text-bone"
         style={{ height: "300vh" }}
       >
-      <div className="sticky top-0 h-screen flex items-center">
+      <div className="sticky top-0 h-screen pt-24 flex items-center">
+        {/* pt-24 (not margin — margins collapse through a sticky parent)
+            keeps centered content clear of the fixed nav (h-24 unscrolled /
+            h-16 scrolled) so nothing sits behind it. */}
         <div className="max-w-container mx-auto w-full px-gutter grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
           {/* LEFT: pinned photo pane (crossfade between service photos) */}
-          <div className="lg:col-span-6 relative aspect-[4/5] max-h-[75vh] overflow-hidden bg-ink-900">
+          <div className="lg:col-span-6 relative aspect-[4/5] max-h-[65vh] overflow-hidden bg-ink-900">
             {[
               { src: pillars[0].image, alt: pillars[0].title, op: op1 },
               { src: pillars[1].image, alt: pillars[1].title, op: op2 },
@@ -174,19 +177,19 @@ export function CapabilitiesPinned() {
 
           {/* RIGHT: single pillar text at a time — AnimatePresence mode="wait" */}
           <div className="lg:col-span-6 relative">
-            <div className="mb-10">
-              <div className="flex items-center gap-3 mb-6">
+            <div className="mb-8">
+              <div className="flex items-center gap-3 mb-4">
                 <span className="h-px w-8 bg-signal" />
                 <span className="font-mono uppercase tracking-[0.22em] text-[0.7rem] text-signal">
                   How we work
                 </span>
               </div>
-              <h2 className="font-display text-[clamp(2rem,3.8vw,3rem)] leading-[1.05] font-semibold tracking-tight text-bone">
+              <h2 className="font-display text-[clamp(1.75rem,3.2vw,2.75rem)] leading-[1.1] font-semibold tracking-tight text-bone">
                 Three stages, one accountable partner
               </h2>
             </div>
 
-            <div className="relative min-h-[320px]">
+            <div className="relative min-h-[260px]">
               <AnimatePresence mode="wait" initial={false}>
                 <motion.div
                   key={active}
@@ -195,7 +198,7 @@ export function CapabilitiesPinned() {
                   exit={{ opacity: 0, y: -12 }}
                   transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                 >
-                  <div className="flex items-baseline gap-6 mb-6">
+                  <div className="flex items-baseline gap-6 mb-4">
                     <span className="font-mono text-signal text-sm tracking-widest">
                       {pillars[active].n}
                     </span>
@@ -204,10 +207,10 @@ export function CapabilitiesPinned() {
                       {String(active + 1).padStart(2, "0")} / 03
                     </span>
                   </div>
-                  <h3 className="font-display text-4xl md:text-5xl font-semibold tracking-tight text-bone mb-6">
+                  <h3 className="font-display text-3xl md:text-4xl font-semibold tracking-tight text-bone mb-4">
                     {pillars[active].title}
                   </h3>
-                  <p className="text-steel-400 text-lg leading-relaxed max-w-lg">
+                  <p className="text-steel-400 text-base md:text-lg leading-relaxed max-w-lg">
                     {pillars[active].body}
                   </p>
                 </motion.div>
@@ -215,7 +218,7 @@ export function CapabilitiesPinned() {
             </div>
 
             {/* Progress rail */}
-            <div className="mt-16 flex items-center gap-3">
+            <div className="mt-10 flex items-center gap-3">
               {[0, 1, 2].map((i) => (
                 <ProgressDot key={i} idx={i} progress={scrollYProgress} />
               ))}
