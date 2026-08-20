@@ -21,28 +21,27 @@ export function CeoMessage() {
               </div>
             </Reveal>
             <Reveal delay={80}>
-              <div className="relative aspect-square max-w-[300px] border border-bone/15 overflow-hidden bg-gradient-to-br from-ink-700 via-ink-800 to-ink-900">
-                <div className="absolute inset-0 grid-bg opacity-60" />
-                {imgOk && (
-                  <Image
-                    src="/ceo.jpg"
-                    alt={`${site.ceo}, Chief Executive Officer of ${site.name}`}
-                    fill
-                    sizes="(min-width: 1024px) 300px, 60vw"
-                    className="object-cover object-top"
-                    onError={() => setImgOk(false)}
-                    unoptimized
-                  />
-                )}
-                <div className="absolute inset-0 bg-gradient-to-t from-ink-900 via-ink-900/40 to-transparent pointer-events-none" />
-                <div className="absolute inset-0 flex items-end p-6">
-                  <div>
-                    <div className="font-display text-2xl text-bone leading-tight">
-                      {site.ceo}
-                    </div>
-                    <div className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-steel mt-2">
-                      Chief Executive Officer
-                    </div>
+              <div className="max-w-[300px]">
+                <div className="relative aspect-square border border-bone/15 overflow-hidden bg-gradient-to-br from-ink-700 via-ink-800 to-ink-900">
+                  <div className="absolute inset-0 grid-bg opacity-60" />
+                  {imgOk && (
+                    <Image
+                      src="/ceo.jpg"
+                      alt={`${site.ceo}, Chief Executive Officer of ${site.name}`}
+                      fill
+                      sizes="(min-width: 1024px) 300px, 60vw"
+                      className="object-cover object-top"
+                      onError={() => setImgOk(false)}
+                      unoptimized
+                    />
+                  )}
+                </div>
+                <div className="mt-4">
+                  <div className="font-display text-2xl text-bone leading-tight">
+                    {site.ceo}
+                  </div>
+                  <div className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-steel mt-2">
+                    Chief Executive Officer
                   </div>
                 </div>
               </div>
