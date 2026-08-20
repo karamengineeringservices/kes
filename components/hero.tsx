@@ -47,9 +47,16 @@ export function Hero() {
       ref={sectionRef}
       className="relative min-h-[100svh] bg-ink pt-20 md:pt-24 overflow-hidden flex flex-col"
     >
-      {/* Full-viewport frigate scene as background */}
+      {/* Full-viewport frigate scene as background.
+          Faded down on mobile — the illustration's fine detail (bridge
+          window strips, porthole row) reads as stray clutter once the
+          scene is cropped tight for a narrow portrait screen, and no
+          amount of overlay tint fully hides shapes that are themselves
+          high-contrast against the ship's light hull. Fading the source
+          art itself toward the section's own ink background is what
+          actually removes that contrast. */}
       <motion.div
-        className="absolute inset-0 z-0"
+        className="absolute inset-0 z-0 opacity-45 md:opacity-100"
         style={reduce ? undefined : { scale: bgScale }}
       >
         <FrigateScene />
