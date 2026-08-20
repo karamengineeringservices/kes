@@ -29,7 +29,7 @@ export function CeoMessage() {
                     alt={`${site.ceo}, Chief Executive Officer of ${site.name}`}
                     fill
                     sizes="(min-width: 1024px) 300px, 60vw"
-                    className="object-cover"
+                    className="object-cover object-top"
                     onError={() => setImgOk(false)}
                     unoptimized
                   />
