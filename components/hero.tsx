@@ -77,9 +77,21 @@ export function Hero() {
         }}
       />
 
-      {/* Left-column dark scrim for text readability — softer so ship shows through */}
+      {/* Mobile: text spans the full width (no side column to fade into), so
+          use a stronger vertical wash instead of the desktop left scrim —
+          otherwise ship-art detail (window strips, portholes) shows through
+          raw behind the paragraph and reads as stray clutter. */}
       <div
-        className="absolute inset-0 pointer-events-none z-[2]"
+        className="md:hidden absolute inset-0 pointer-events-none z-[2]"
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(4,9,20,0.5) 0%, rgba(4,9,20,0.68) 30%, rgba(4,9,20,0.8) 65%, rgba(4,9,20,0.85) 100%)"
+        }}
+      />
+
+      {/* Desktop: left-column dark scrim for text readability — softer so ship shows through */}
+      <div
+        className="hidden md:block absolute inset-0 pointer-events-none z-[2]"
         style={{
           background:
             "linear-gradient(90deg, rgba(4,9,20,0.75) 0%, rgba(4,9,20,0.5) 20%, rgba(4,9,20,0.25) 40%, rgba(4,9,20,0.08) 60%, rgba(4,9,20,0) 80%)"
