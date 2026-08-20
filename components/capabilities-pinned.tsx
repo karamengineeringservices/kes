@@ -137,8 +137,8 @@ export function CapabilitiesPinned() {
         className="hidden lg:block relative bg-ink text-bone"
         style={{ height: "300vh" }}
       >
-      <div className="sticky top-0 h-screen pt-24 flex items-center">
-        {/* pt-24 (not margin — margins collapse through a sticky parent)
+      <div className="sticky top-0 h-screen pt-32 flex items-center">
+        {/* pt-32 (not margin — margins collapse through a sticky parent)
             keeps centered content clear of the fixed nav (h-24 unscrolled /
             h-16 scrolled) so nothing sits behind it. */}
         <div className="max-w-container mx-auto w-full px-gutter grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
