@@ -4,10 +4,10 @@ import { Resend } from "resend";
 export const runtime = "nodejs";
 
 const TO_EMAIL = "karamengineeringservices@gmail.com";
-// Resend's shared testing domain — works immediately with no DNS setup.
-// Once the karamengineeringservices.com domain is verified in Resend, swap
-// this for something like "KARAM Website <quotes@karamengineeringservices.com>".
-const FROM_EMAIL = "KARAM Website <onboarding@resend.dev>";
+// karamengineeringservices.com is verified in Resend (DKIM/SPF/MX/DMARC
+// all confirmed) — sending from the branded domain now instead of the
+// shared onboarding@resend.dev testing address.
+const FROM_EMAIL = "KARAM Engineering Services <quotes@karamengineeringservices.com>";
 
 function escapeHtml(value: string) {
   return value
