@@ -12,7 +12,7 @@ export const site = {
   },
   cell: "+92 333 2054961",
   email: "karamengineeringservices@gmail.com",
-  website: "www.karam.com.pk",
+  website: "www.karamengineeringservices.com",
   registrations: [
     { label: "PEC Licence", value: "No. 15351", category: "Category C4/E" },
     { label: "FBR NTN", value: "7093224" }
