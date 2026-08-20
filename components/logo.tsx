@@ -11,8 +11,6 @@ export function Logo({
 }) {
   const text = variant === "light" ? "text-bone" : "text-ink";
   const meta = variant === "light" ? "text-steel" : "text-steel-600";
-  // On dark surfaces the black gear needs a light backdrop to be visible.
-  const badgeBg = variant === "light" ? "bg-bone" : "bg-transparent";
 
   return (
     <Link
@@ -20,15 +18,13 @@ export function Logo({
       aria-label={`${site.name}, home`}
       className={`inline-flex items-center gap-3 group ${className}`}
     >
-      <span
-        className={`relative inline-flex items-center justify-center w-9 h-9 shrink-0 ${badgeBg} rounded-sm overflow-hidden`}
-      >
+      <span className="relative inline-flex items-center shrink-0 h-8 sm:h-9">
         <Image
-          src="/logo.jpg"
+          src="/logo-mark.png"
           alt=""
-          width={512}
-          height={551}
-          className="w-8 h-8 object-contain"
+          width={1067}
+          height={590}
+          className="h-full w-auto object-contain"
           priority
         />
       </span>
