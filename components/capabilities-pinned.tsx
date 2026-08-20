@@ -10,6 +10,7 @@ import {
   useTransform,
   useReducedMotion
 } from "framer-motion";
+import { Reveal } from "./reveal";
 
 const pillars = [
   {
@@ -69,11 +70,73 @@ export function CapabilitiesPinned() {
   const scale = useTransform(scrollYProgress, [0, 1], [1.02, 1.12]);
 
   return (
-    <section
-      ref={ref}
-      className="relative bg-ink text-bone"
-      style={{ height: "300vh" }}
-    >
+    <>
+      {/* MOBILE / TABLET: plain stacked sections — no scroll-pinning, so the
+          user always sees a full image + full text per stage as they scroll,
+          instead of the desktop pin effect squeezing both into one viewport. */}
+      <section className="lg:hidden relative bg-ink text-bone py-section">
+        <div className="max-w-container mx-auto px-gutter">
+          <div className="mb-12">
+            <div className="flex items-center gap-3 mb-6">
+              <span className="h-px w-8 bg-signal" />
+              <span className="font-mono uppercase tracking-[0.22em] text-[0.7rem] text-signal">
+                How we work
+              </span>
+            </div>
+            <h2 className="font-display text-[clamp(2rem,7vw,3rem)] leading-[1.05] font-semibold tracking-tight text-bone">
+              Three stages, one accountable partner
+            </h2>
+          </div>
+
+          <div className="flex flex-col gap-14">
+            {pillars.map((p, i) => (
+              <Reveal key={p.n} delay={i * 60}>
+                <div className="relative aspect-[4/3] w-full overflow-hidden bg-ink-900">
+                  <Image
+                    src={p.image}
+                    alt={p.title}
+                    fill
+                    unoptimized
+                    sizes="100vw"
+                    className="object-cover"
+                  />
+                  <div
+                    className="absolute inset-0 pointer-events-none"
+                    style={{
+                      background:
+                        "radial-gradient(ellipse at center, transparent 55%, rgba(4,9,20,0.55) 100%)"
+                    }}
+                  />
+                </div>
+                <div className="mt-6">
+                  <div className="flex items-baseline gap-6 mb-4">
+                    <span className="font-mono text-signal text-sm tracking-widest">
+                      {p.n}
+                    </span>
+                    <span className="h-px flex-1 bg-bone/15" />
+                    <span className="font-mono text-[0.65rem] uppercase tracking-[0.22em] text-steel">
+                      {String(i + 1).padStart(2, "0")} / 03
+                    </span>
+                  </div>
+                  <h3 className="font-display text-3xl font-semibold tracking-tight text-bone mb-4">
+                    {p.title}
+                  </h3>
+                  <p className="text-steel-400 text-base leading-relaxed">
+                    {p.body}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* DESKTOP: pinned sticky-scroll capabilities section. */}
+      <section
+        ref={ref}
+        className="hidden lg:block relative bg-ink text-bone"
+        style={{ height: "300vh" }}
+      >
       <div className="sticky top-0 h-screen flex items-center">
         <div className="max-w-container mx-auto w-full px-gutter grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
           {/* LEFT: pinned photo pane (crossfade between service photos) */}
@@ -160,7 +223,8 @@ export function CapabilitiesPinned() {
           </div>
         </div>
       </div>
-    </section>
+      </section>
+    </>
   );
 }
 
