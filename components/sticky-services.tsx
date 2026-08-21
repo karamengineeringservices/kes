@@ -77,8 +77,11 @@ export function StickyServices() {
         ref={sectionRef}
         className="max-w-container mx-auto px-gutter grid lg:grid-cols-12 gap-10 lg:gap-16 pb-section"
       >
-        {/* Sticky left visual */}
-        <div className="lg:col-span-5 relative">
+        {/* Sticky left visual — desktop only. On mobile the panel isn't
+            sticky (it just sits once above the list), so as you scroll past
+            it into later services you'd never see their photo swap in;
+            each mobile list item gets its own inline image instead. */}
+        <div className="hidden lg:block lg:col-span-5 relative">
           <div className="lg:sticky lg:top-28 aspect-[4/5] max-h-[80vh] bg-ink-700 border border-bone/10 overflow-hidden">
             {/* Photo layers — crossfade between service photos (nice effect for photos) */}
             {services.map((s, i) => (
@@ -132,6 +135,19 @@ export function StickyServices() {
                   active === i ? "opacity-100" : "opacity-45"
                 }`}
               >
+                {/* Mobile-only inline photo — desktop uses the sticky panel above */}
+                <div className="lg:hidden relative aspect-[4/5] mb-6 bg-ink-700 border border-bone/10 overflow-hidden">
+                  <ServiceCanvas i={i} />
+                  <div className="absolute inset-0">
+                    <Photo
+                      src={`/service-${String(i + 1).padStart(2, "0")}.jpg`}
+                      alt={s.title}
+                      sizes="90vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-ink-900 via-ink-900/40 to-ink-900/20" />
+                  </div>
+                </div>
+
                 <div className="flex items-center gap-4 mb-5">
                   <span className="font-mono text-signal text-sm tracking-widest">
                     {s.index}
